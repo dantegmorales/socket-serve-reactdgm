@@ -1,53 +1,34 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta charset='utf-8'>
-    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>Mini Chat</title>
-    <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Socket Server</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha2/css/bootstrap.min.css" integrity="sha384-DhY6onE6f3zzKbjUPRc2hOzGAdEf4/Dz+WJwBvEYL/lkkIsI3ihufq9hk9K4lVoK" crossorigin="anonymous">
 </head>
 <body class="container">
-    <h1 class="mt-5">Mini Chat</h1>
+
+    <h1 class="mt-5">Acceso denegado</h1>
     <hr>
-    <form id="miFormulario">
-        <div class="row">
-            <div class="col-8">
-                <input type="text" id="txtMensaje" placeholder="Mensaje" class="form-control">
-            </div>
-            <div class="col-4">
-                <button type="submit" class="btn btn-primary">
-                    Enviar
-                </button>
-            </div>
-        </div>
-    </form>
-    <div class="row">
-        <div class="col">
-            <ul id="misMensajes" class="mt-5">
-                
-            </ul>
-        </div>
-    </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js" integrity="sha512-q/dWJ3kcmjBLU4Qc47E4A9kTB4m3wuTY7vkFJDTZKjTs8jhyGQnaUrxa0Ytd0ssMZhbNua9hE+E7Qv1j+DyZwA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.0.1/socket.io.js" integrity="sha512-vGcPDqyonHb0c11UofnOKdSAt5zYRpKI4ow+v6hat4i96b7nHSn8PQyk0sT5L9RECyksp+SztCPP6bqeeGaRKg==" crossorigin="anonymous"></script>
+
     <script>
+        // Conexión con el socket server
         const socket = io('https://react-socket-server-dante.herokuapp.com/');
-        //Referencias a los elementos del DOM
-        const formulario = document.querySelector('#miFormulario');
-        const mensajes = document.querySelector('#misMensajes');
-        const txtMensaje = document.querySelector('#txtMensaje');
 
-        formulario.addEventListener('submit',(ev)=>{
-            ev.preventDefault();
-            const nuevoMensaje = txtMensaje.value;
-            socket.emit('mensaje-to-server',{texto:nuevoMensaje});
+        
+        /// Para emitir
+        // socket.emit('mensaje-to-server', { data });
+        
+        // Para escuchar
+        socket.on('mensaje-from-server', (data) => {
+            // callback a ejecutar
         });
         
-        socket.on('mensaje-from-server',(data)=>{
-            mensajes.innerHTML+=`<li>${data.texto}</li>`
-        });
 
     </script>
+    
 </body>
 </html>
